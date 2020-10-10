@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_58872_needit_needit</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>NeedIt When needed field date</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+// 	// assign current time to compare
+// 	var rightnow = new GlideDateTime();
+// 	gs.debug("rightnow: "+ rightnow);
+// 	// assign the when needed value entered
+// 	var whenNeeded = new GlideDateTime(current.u_when_needed);
+// 	gs.debug("whenneeded: "+ whenNeeded);
+	
+// 	// compare both values and put an error message 
+// 	if (whenNeeded.before(rightnow)) {
+// 		gs.addErrorMessage("When needed cannot be a past date. Your request has not been saved to database");
+// 		gs.error("Invalid When needed")
+// 		// stop query execution
+// 		current.setAbortAction(true);
+// 	}
+// 	gs.info("valid When needed");
+	
+// 	// challenge: to restrict at date level not just the time level. Do not allow date <= today
+// 	var today = rightnow.getLocalDate();
+// 	var whenNeededDate = whenNeeded.getLocalDate();
+// 	// compare them
+// 	if (today.compareTo(whenNeededDate) == 0) {
+// 		gs.addErrorMessage("NeedIt requests cannot be submitted for today.");
+// 		current.setAbortAction(true);
+// 	}
+	
+	// use the Script Include from NeedIt utils to validate the When needed
+	// create instance of NeedItUtils
+	var niUtils = new NeedItUtils();
+	// call the isDatePast method by passing the When needed field value
+	var isPast = niUtils.isDatePast(current.u_when_needed);
+	
+	// check what NeedItUtils Script Include responded
+	if (isPast == true) {
+		gs.addErrorMessage("When needed cannot be a past date. Your request has not been saved to database.");
+		current.setAbortAction(true);
+	}
+	
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-10 10:42:07</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>936e4f4d537310105aedddeeff7b126d</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>NeedIt When needed field date</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_936e4f4d537310105aedddeeff7b126d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-10-10 13:45:36</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=936e4f4d537310105aedddeeff7b126d"/>
+</record_update>
